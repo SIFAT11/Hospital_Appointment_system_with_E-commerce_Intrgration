@@ -1,0 +1,107 @@
+{% extends "admin/adminDashboard.html" %}
+{% load static %}
+{% block option %}{% endblock %}
+{% block content %}
+  <br><br><br>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- IMAGE CONTAINER BEGIN -->
+      <div class="col-lg-6 col-md-6 d-none d-md-block infinity-image-cont imgg"></div>
+      <!-- IMAGE CONTAINER END -->
+
+      <!-- FORM CONTAINER BEGIN -->
+      <div class="col-lg-6 col-md-6 infinity-form-container">
+        <div class="col-lg-9 col-md-12 col-sm-8 col-xs-12 infinity-form">
+          <!-- Company Logo -->
+
+          <div class="text-center mb-4">
+            <h4>Add Product</h4>
+          </div>
+          <!-- Form -->
+          <form class="px-3" action="{% url 'add_medicine' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Input Box -->
+            <div class="form-input">
+              <span><i class="fa-solid fa-capsules"></i></span>
+              <input type="text" name="product_name" placeholder="Product name" tabindex="10" required class="brs">
+            </div>
+            <div class="form-input">
+              <span><i class="fa-solid fa-dollar-sign"></i></span>
+              <input type="text" name="price" placeholder="Price" tabindex="10" required class="brs">
+            </div>
+
+            <div class="form-input">
+               <span><i class="fa-solid fa-dollar-sign"></i></span>
+               <input type="text" name="quantity" placeholder="quantity" tabindex="10" required class="brs">
+             </div>
+
+            <div class="form-input">
+               <span><i class="fa-regular fa-building"></i></span>
+               <select name="category_id" class="brs" required>
+                   {% for cat in categories %}
+                       <option value="{{ cat.id }}">{{ cat.name }}</option>
+                   {% endfor %}
+               </select>
+           </div>
+           
+
+            <div class="form-input">
+              <span><i class="fa-solid fa-image"></i></span>
+              <input type="file" name="product_image" placeholder="Upload image" required class="brs">
+            </div>
+
+            <textarea name="product_description" id="message" rows="10"
+              class="block p-4 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Describe the product here"></textarea>
+
+            <!-- Register Button -->
+            <div class="mb-3">
+              <button type="submit" class="btn btn-block bg-gradient-info">Add Product</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- FORM CONTAINER END -->
+    </div>
+  </div>
+</body>
+
+<style>
+   .infinity-image-cont {
+     background: url('https://www.example.com/yourimage.jpg') center no-repeat;
+     opacity: 1;
+     height: 100vh;
+   }
+ 
+   .form-input {
+     margin-bottom: 20px;
+   }
+ 
+   .brs {
+     width: 100%;
+     padding: 10px;
+     border-radius: 5px;
+     border: 1px solid #ccc;
+   }
+ 
+   textarea {
+     width: 100%;
+     padding: 10px;
+     border-radius: 5px;
+     border: 1px solid #ccc;
+   }
+ 
+   button {
+     width: 100%;
+     padding: 10px;
+     border-radius: 5px;
+     border: none;
+     color: white;
+   }
+ 
+   .btn-block {
+     background-color: #4e73df;
+   }
+ </style>
+ 
+{% endblock %}

@@ -1,0 +1,67 @@
+{%extends 'index.html'%}
+{% load static %}
+{% block title %} Doctors {% endblock %}
+{%block script%}{%endblock%}
+{% block content %}
+<body>
+	<link rel="stylesheet" href="{% static 'assets/css/form.css' %}">
+	<div class="container-fluid">
+		<div class="row ">
+			<!-- IMAGE CONTAINER BEGIN -->
+			<div class="col-lg-6 col-md-6 d-none d-md-block infinity-image-container"></div>
+			<!-- IMAGE CONTAINER END -->
+
+			<!-- FORM CONTAINER BEGIN -->
+			<div class="col-lg-6 col-md-6 infinity-form-container">
+				<div class="col-lg-9 col-md-12 col-sm-8 col-xs-12 infinity-form">
+					<!-- Company Logo -->
+
+					<div class="text-center mb-4">
+						<h4>Admin Login</h4>
+					</div>
+					<!-- Form -->
+					<form class="px-3" method="POST">
+						{% csrf_token %}
+						{% if messages %}
+						<ul class="messages">
+							{% for message in messages %}
+								<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+
+						<div class="form-input">
+							<span><i class="fa fa-user-o"></i></span>
+							<input type="text" name="username" placeholder="Super-Username" tabindex="10" required>
+						</div>
+						<div class="form-input">
+							<span><i class="fa fa-lock"></i></span>
+							<input type="password" name="password" placeholder="Password" required>
+						</div>
+						<!-- Login Button -->
+						<div class="mb-3">
+							<button type="submit" class="btn btn-block">Login</button>
+						</div>
+						<div class="text-center mb-2">
+							<div class="text-center mb-2 ">or register with</div>
+							<!-- Facebook Button -->
+							<a href="" class="btn btn-social btn-facebook">facebook</a>
+
+							<!-- Google Button -->
+							<a href="" class="btn btn-social btn-google">google</a>
+
+							<!-- Twitter Button -->
+							<a href="" class="btn btn-social btn-twitter">twitter</a>
+						</div>
+
+						<div class="text-center mb-5 ">Don't have account?
+							<a class="login-link" href="{% url 'login' %}">If you are not Admin then user Login here</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- FORM CONTAINER END -->
+		</div>
+	</div>
+</body>
+{%endblock%}

@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Doctors {% endblock %}
+{% block script %}{% endblock %}
+{% block content %}
+<style>
+    /* Style for the search bar container */
+    .search-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .search-input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+    
+    .search-button {
+        background: #0077b6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    
+    .search-button:hover {
+        background: #005c8d;
+    }
+
+</style>
+<body>
+    <br><br>
+    <div class="py-5">
+        <div class="container">
+            <div class="search-container w-50 mb-5">
+                <form method="GET" action="{% url 'medicine' %}">
+                    <input type="text" class="search-input" name="q" placeholder="Search...">
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+            </div>            
+            <div class="row">
+                {% for medicine in medicines %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-profile">
+                        <a href="#">
+                            <div class="p-3">
+                                <img class="w-100 height border-radius-md" src="{{ medicine.picture.url }}" alt="{{ medicine.name }}">
+                            </div>
+                        </a>
+                        <div class="card-body blur justify-content-center text-center mt-n5 mx-4 mb-4 border-radius-md">
+                            <h4 class="mb-0">{{ medicine.name }}</h4>
+                            <p>{{ medicine.details }}</p>
+                            <h6>Price: ${{ medicine.price }}</h6>
+                            <p>Stock:{{medicine.quantity}}</p>
+                            <p>Category: {{ medicine.category.name }}</p>
+                            <div class="row">
+                                <div class="col-lg-4 col-4">
+                                    <a href="{% url 'add_to_cart' medicine.id %}" class="bg-gradient-info px-8 btn">Add to Cart</a>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+{% endblock %}

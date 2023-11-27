@@ -1,0 +1,65 @@
+
+{%extends 'index.html'%}
+{% load static %}
+{% block title %} Doctors {% endblock %}
+{%block script%}{%endblock%}
+{%block content %}
+<body>
+	<link rel="stylesheet" href="{% static 'assets/css/form.css' %}">
+	<div class="container-fluid">
+		<div class="row">
+			<!-- IMAGE CONTAINER BEGIN -->
+			<div class="col-lg-6 col-md-6 d-none d-md-block infinity-image-container"></div>
+			<!-- IMAGE CONTAINER END -->
+
+
+			<!-- FORM CONTAINER BEGIN -->
+			<div class="col-lg-6 col-md-6 infinity-form-container">
+				<div class="col-lg-8 col-md-12 col-sm-8 col-xs-12 infinity-form">
+					<div class="reset-form d-block">
+						<form class="reset-password-form px-3" method="POST">
+							{% csrf_token %}
+							<h4 class="mb-3">Reset Your password</h4>
+							<p class="mb-3 ">
+								You can reset your password from here
+							</p>
+						
+							<div class="form-input">
+								<span><i class="fa fa-user"></i></span>
+								<input type="text" name="username" placeholder="User_Name" tabindex="10" required>
+							</div>
+						
+							<div class="form-input">
+								<span><i class="fa fa-envelope"></i></span>
+								<input type="email" name="email" placeholder="Email Address" tabindex="10" required>
+							</div>
+						
+							<div class="form-input">
+								<span><i class="fa fa-key"></i></span>
+								<input type="password" name="new_pass" placeholder="New Password" tabindex="10" required>
+							</div>
+							<div class="mb-3">
+								<button type="submit" class="btn">Reset</button>
+							</div>
+						</form>						
+					</div>
+
+					<div class="reset-confirmation d-none px-3">
+						<div class="mb-4">
+							<h4 class="mb-3">Link was sent</h4>
+							<h6 class="text-white">Please, check your inbox for a password reset link.</h6>
+						</div>
+
+						<a href="login.html">
+							<button type="submit" class="btn">Login Now</button>
+						</a>
+						<div>
+						</div>
+					</div>
+					<!-- FORM CONTAINER END -->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+{%endblock%}

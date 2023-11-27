@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Doctors {% endblock %}
+{% block script %}{% endblock %}
+{% block content %}
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-info panel-border margin-top-none">
+                    <div class="panel-heading panel-bg">
+                        <i class="fa fa-television"></i> Order History <div class="pull-right"></div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="order-history">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Order Date</th>
+                                        <th>Total Price</th>
+                                        <th>Status</th>
+                                        <th>order-details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                    <tr>
+                                        <td><a href="{% url 'order_details' order_id=order.order_id %}">{{ order.order_id }}</a></td>
+                                        <td>{{ order.order_time }}</td>
+                                        <td>$ {{ order.total_price }}</td>
+                                        <td>{{ order.payment }}</td>
+                                        <td><a href="{% url 'order_details' order_id=order.order_id %}" class="btn btn-primary btn-sm">View</a></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

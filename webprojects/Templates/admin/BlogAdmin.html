@@ -1,0 +1,133 @@
+{% extends "admin/adminDashboard.html" %}
+{% load static %}
+{% block option %}{% endblock %}
+{% block content %}
+<style>
+   /* Your CSS styles here */
+</style>
+
+<body>
+  <br><br><br>
+  <div class="container-fluid">
+   <div class="row">
+    <!-- IMAGE CONTAINER BEGIN -->
+    <div class="col-lg-6 col-md-6 d-none d-md-block infinity-image-cont imgg"></div>
+    <!-- IMAGE CONTAINER END -->
+ 
+    <!-- FORM CONTAINER BEGIN -->
+    <div class="col-lg-6 col-md-6 infinity-form-container">
+     <div class="col-lg-9 col-md-12 col-sm-8 col-xs-12 infinity-form">
+      <!-- Company Logo -->
+ 
+      <div class="text-center mb-4">
+       <h4>Add Blog</h4>
+      </div>
+      <!-- Form -->
+      <form class="px-3" method="POST" enctype="multipart/form-data" action="{% url 'addBlog' %}">
+        {% csrf_token %}
+       <!-- Input Box -->
+       <div class="form-input">
+        <span><i class="fa-solid fa-book"></i></span>
+        <input type="text" name="title" placeholder="Blog name" tabindex="10" required class="brs">
+       </div>
+       <div class="form-input">
+        <span><i class="fa-solid fa-book"></i></span>
+        <input type="text" name="head0" placeholder="Blog topics" tabindex="10" required class="brs">
+       </div>
+ 
+       <div class="form-input">
+         <span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+         <input type="date" name="pub_date" id="" class="brs">
+       </div>
+     
+ 
+       <div class="form-input">
+        <span><i class="fa-solid fa-image"></i></span>
+        <input type="file" name="thumbnail" placeholder="Upload image" required class="brs">
+       </div>
+
+       <div class="form-input">
+        <span><i class="fa-solid fa-book"></i></span>
+        <textarea id="message" name="chead0" rows="2" placeholder="Description" class="brs"></textarea>
+       </div>
+
+       <div class="form-input">
+        <span><i class="fa-solid fa-book"></i></span>
+        <input type="text" name="head1" placeholder="Head 1" tabindex="10" required class="brs">
+       </div>
+
+       <div class="form-input">
+        <span><i class="fa-solid fa-book"></i></span>
+        <textarea id="message" name="chead1" rows="2" placeholder="Content 1" class="brs"></textarea>
+       </div>
+
+       <div class="form-input">
+        <span><i class="fa-solid fa-book"></i></span>
+        <input type="text" name="head2" placeholder="Head 2" tabindex="10" required class="brs">
+       </div>
+
+       <div class="form-input">
+        <span><i class="fa-solid fa-book"></i></span>
+        <textarea id="message" name="chead2" rows="2" placeholder="Content 2" class="brs"></textarea>
+       </div>
+ 
+       <!-- Register Button -->
+       <div class="mb-3">
+        <button type="submit" class="btn btn-block bg-gradient-info">Add Blog</button>
+       </div>
+      </form>
+     </div>
+    </div>
+    <!-- FORM CONTAINER END -->
+   </div>
+  </div>
+</body>
+
+
+<style>
+   body {
+     font-family: Arial, sans-serif;
+   }
+   .infinity-image-cont {
+     background: url('https://img.freepik.com/free-vector/blogging-fun-content-creation-online-streaming-video-blog-young-girl-making-selfie-social-network-sharing-feedback-self-promotion-strategy-vector-isolated-concept-metaphor-illustration_335657-855.jpg') center no-repeat;
+     opacity: 1;
+     height: 100vh;
+   }
+   .infinity-form-container {
+     padding: 20px;
+   }
+   .form-input {
+     margin-bottom: 20px;
+   }
+   .form-input input, 
+   .form-input textarea, 
+   .form-input select {
+     width: 100%;
+     padding: 10px;
+     border: 1px solid #ddd;
+     border-radius: 5px;
+     font-size: 16px;
+   }
+   .btn {
+     width: 100%;
+     padding: 10px;
+     border: none;
+     border-radius: 5px;
+     font-size: 16px;
+     color: #fff;
+     cursor: pointer;
+   }
+   .bg-gradient-info {
+     background-color: #4e73df;
+   }
+   .mb-3 {
+     margin-bottom: 1rem;
+   }
+   .text-center {
+     text-align: center;
+   }
+   .brs {
+     border-radius: 5px;
+   }
+ </style>
+{% endblock %}

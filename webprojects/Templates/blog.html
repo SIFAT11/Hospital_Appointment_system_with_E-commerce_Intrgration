@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Doctors {% endblock %}
+{% block script %}{% endblock %}
+{% block content %}
+<body>
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                {% for blogpost in blogposts %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-profile">
+                        <a href="{% url 'blogIDdetail' blogpost.post_id %}">
+                            <div class="p-3">
+                                <img class="w-100 height border-radius-md" src="{{ blogpost.thumbnail.url }}">
+                            </div>
+                        </a>
+                        <div class="card-body blur justify-content-center text-center mt-n5 mx-4 mb-4 border-radius-md">
+                            <h4 class="mb-0">{{ blogpost.title }}</h4>
+                            <p>{{ blogpost.chead0 }}</p>
+                            <div class="row justify-content-center text-center">
+                                <div class="col-lg-4 col-4">
+                                    <h5 class="text-info mb-0">{{ blogpost.post_id }}</h5>
+                                    <small>Blog</small>
+                                </div>
+                                <div class="col-lg-4 col-4">
+                                    <h5 class="text-info mb-0">BlogID</h5>
+                                    <small>{{ blogpost.post_id }}</small>
+                                </div>
+                                <div class="col-lg-4 col-4">
+                                    <h5 class="text-info mb-0">BlogInfo</h5>
+                                    <small><a href="{% url 'blogIDdetail' blogpost.post_id %}">Read more..</a></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

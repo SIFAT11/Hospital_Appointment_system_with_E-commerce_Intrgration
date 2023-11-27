@@ -1,0 +1,49 @@
+{% extends "admin/adminDashboard.html" %}
+{% load static %}
+{% block option %}{% endblock %}
+{% block content %}
+<br><br><br><br><br>
+<div class="container">
+    <h2>Total Orders</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Subtotal Amount</th>
+                <th>Payment Status</th>
+                <th>Order Date</th>
+                <th>Change Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order_item in order %}
+            <tr>
+                <td>{{ order_item.order.order_id }}</td>
+                <td>{{ order_item.product.name }}</td>
+                <td>{{ order_item.quantity }}</td>
+                <td>{{ order_item.subtotal_amount }}</td>
+                <td>{{ order_item.order.payment }}</td>
+                <td>{{ order_item.order.order_time }}</td>
+                <td>
+                    <form action="{% url 'update_payment_status' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="order_id" value="{{ order_item.order.order_id }}">
+                        <select name="payment_status" onchange="this.form.submit()">
+                            <option value="pending" {% if order_item.order.payment == 'pending' %}selected{% endif %}>Pending</option>
+                            <option value="paid" {% if order_item.order.payment == 'paid' %}selected{% endif %}>Paid</option>
+                            <option value="failed" {% if order_item.order.payment == 'failed' %}selected{% endif %}>Failed</option>
+                        </select>
+                    </form>
+                </td>
+                <td>
+                    <a href="{% url 'view_order' order_item.order.order_id %}" class="btn btn-primary">View Order</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+
+{%extends 'index.html'%}
+{% load static %}
+{% block title %} Doctors {% endblock %}
+{%block script%}{%endblock%}
+{%block content %}
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+<body>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        {% for doctor in doctors %}
+        <div class="col-lg-4 col-md-6">
+          <div class="card card-profile">
+            <a href="javascript:;">
+              <div class="p-3">
+                <img class="w-100 height border-radius-md" src="{{ doctor.Doctor_image.url }}" alt="Profile Image">
+              </div>
+            </a>
+            <div class="card-body blur justify-content-center text-center mt-n5 mx-4 mb-4 border-radius-md">
+              <h4 class="mb-0">{{ doctor.Doctor_name }}</h4>
+              <p>{{ doctor.department.Department_name }}</p>
+              {% for appointment_time in doctor.appointmenttime_set.all %}
+              <p>Start Time: {{ appointment_time.start_time }}</p>
+              <p>End Time: {{ appointment_time.end_time }}</p>
+              {% endfor %}
+
+              <div class="row justify-content-center text-center">
+              <a href="{% url 'doctor_details' doctor.Doctor_id %}" class="btn btn-primary">Click Me</a>
+              </div>
+              <div class="row justify-content-center text-center">
+                <a href="{% url 'appoint' doctor.Doctor_id %}" class="btn btn-primary">Appointment</a>
+            </div>
+            
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</body>
+{%endblock%}

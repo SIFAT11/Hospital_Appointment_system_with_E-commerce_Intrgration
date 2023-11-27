@@ -1,0 +1,211 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Cart product {% endblock %}
+{% block script %}{% endblock %}
+{%block content%}
+<body>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="shop-tab">
+                        <br><br>
+                        <div class="tab-content">
+                            <div class="tab-pane active" role="tabpanel" id="step1">
+                                <div class="panel panel-info panel-border">
+                                    <div class="panel-heading panel-bg"><i class="fa fa-map-o"></i> Shipping Address</div>
+                                        <div class="panel-body">
+                                        <form method="POST" action="{% url 'cheak_out' %}">
+                                        {%csrf_token%}
+                                            <div class="form-group">
+                                                <div class="col-md-12"><strong>First Name:</strong></div>
+                                                <div class="col-md-12">
+                                                    <input type="text" name="first_name" class="form-control" placeholder="Your Frst Name" value="" required >
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12"><strong>Last Name:</strong></div>
+                                                <div class="col-md-12">
+                                                    <input type="text" name="last_name" class="form-control" placeholder="Your Last Name"  value="" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12"><strong>Address:</strong></div>
+                                                <div class="col-md-12">
+                                                    <input type="text" name="address" class="form-control" placeholder="Your Address"  value="" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12"><strong>Phone Number:</strong></div>
+                                                <div class="col-md-12"><input type="text" name="phone_number" placeholder="Your Phone Number"  class="form-control" value="" /></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12"><strong>Email Address:</strong></div>
+                                                <div class="col-md-12"><input type="text" name="email_address"  placeholder="Your Email"  class="form-control" value="" /></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-theme btn-block" name="payment_option" value="sslcommerz_payment">Pay with SSLCOMMERZ</button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-theme btn-block" name="payment_option" value="cash_on_delivery">Cash On Delivery</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 form-horizontal">
+                    <div class="panel panel-info panel-border margin-top-none">
+                        <div class="panel-heading panel-bg">
+                            <i class="fa fa-television"></i> Review Order <div class="pull-right"></div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="order-review">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Product total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in cart_items %}
+                                        <tr class="order-item">
+                                            <td class="product-info">
+                                                <div class="product-image">
+                                                    <img class="img-responsive" src="{{ item.product.picture.url }}" alt="{{ item.product.name }}" />
+                                                </div>
+                                                <div class="product-details">
+                                                    <p class="product-name">{{ item.product.name }}</p>
+                                                    <p class="product-quantity">Quantity: {{ item.quantity }}</p>
+                                                </div>
+                                            </td>
+                                            <td class="quantity">{{ item.quantity }}</td>
+                                            <td class="subtotal">$ {{ item.subtotal }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="order-totals">
+                                    <hr class="separator">
+                                    <div class="subtotal">
+                                        <strong>Subtotal :</strong>
+                                        <div class="pull-right"><span>$ </span><span>{{subtotalall}}</span></div>
+                                    </div>
+                                    <div class="shipping">
+                                        <small>Shipping :</small>
+                                        <div class="pull-right"><span>$ 100</span></div>
+                                    </div>
+                                    <hr class="separator">
+                                    <div class="order-total">
+                                        <strong>Order Total :</strong>
+                                        <div class="pull-right"><span>$ </span><span>{{total_price}}</span></div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                        <style>
+                            /* Style for the order review table */
+                            .order-review {
+                                background-color: #f9f9f9;
+                                border-radius: 5px;
+                                padding: 20px;
+                                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                            }
+                        
+                            .order-item {
+                                border-bottom: 1px solid #ddd;
+                                padding: 15px 0;
+                            }
+                        
+                            .product-info {
+                                display: flex;
+                                align-items: center;
+                            }
+                        
+                            .product-image img {
+                                max-width: 70px;
+                                max-height: 70px;
+                                margin-right: 15px;
+                            }
+                        
+                            .product-details {
+                                flex: 1;
+                            }
+                        
+                            .product-name {
+                                font-weight: bold;
+                                margin: 0;
+                            }
+                        
+                            .product-quantity {
+                                color: #666;
+                                margin: 0;
+                            }
+                        
+                            .quantity, .subtotal {
+                                font-weight: normal;
+                                color: #333;
+                            }
+                        
+                            /* Style for the order totals section */
+                            .order-totals {
+                                margin-top: 20px;
+                                text-align: right;
+                                font-weight: bold;
+                                color: #333;
+                            }
+                        
+                            .separator {
+                                margin: 10px 0;
+                                border: none;
+                                border-top: 1px solid #ddd;
+                            }
+                        
+                            .order-total strong {
+                                font-size: 18px;
+                                color: #333;
+                            }
+                        
+                            /* Style for the continue shopping and checkout buttons */
+                            .buttons {
+                                margin-top: 20px;
+                                display: flex;
+                                justify-content: space-between;
+                            }
+                        
+                            .continue-shopping-btn {
+                                background-color: #f9f9f9;
+                                color: #333;
+                                border: none;
+                                padding: 10px 15px;
+                                border-radius: 5px;
+                                cursor: pointer;
+                            }
+                        
+                            .checkout-btn {
+                                background-color: #3498db;
+                                color: #743030;
+                                border: none;
+                                padding: 10px 20px;
+                                border-radius: 5px;
+                                cursor: pointer;
+                            }
+                            .margin-top-none {
+                                margin-top: 78px;
+                            }
+                        </style>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </section>
+</body>
+{%endblock%}

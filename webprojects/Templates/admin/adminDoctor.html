@@ -1,0 +1,97 @@
+{% extends "admin/adminDashboard.html" %}
+{% load static %}
+{% block option %}{% endblock %}
+{% block content %}
+<style>
+  .infinity-image-cont {
+    background: url('https://cdn.pixabay.com/photo/2023/02/24/04/29/ai-generated-7810166_1280.jpg') center no-repeat;
+    opacity: 1;
+    height: 100vh;
+  }
+
+  /* Remove shadow from card components */
+  .card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
+  }
+
+  .card-profile {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .card-profile h4 {
+    margin-top: 10px;
+    font-size: 24px;
+    color: #333;
+  }
+
+  .card-profile p {
+    color: #555;
+  }
+
+  .btn-group {
+    margin-top: 20px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+</style>
+
+</head>
+
+<body>
+  <br><br><br>
+  <div class="py-5">
+    <div class="container">
+      <a href="{% url 'add_doctor'%}" class="btn btn-success mb-4">Add Doctor</a>
+      <div class="row">
+        {% for doctor in Doctors %}
+        <div class="col-lg-4 col-md-6">
+          <div class="card card-profile">
+            <a href="javascript:;">
+              <div class="p-3">
+                <img class="w-100 height border-radius-md" src="{{ doctor.Doctor_image.url }}">
+              </div>
+            </a>
+            <div class="card-body card-profile">
+              <h4>{{ doctor.Doctor_name }}</h4>
+              <p>{{ doctor.department }}</p>
+              <div class="btn-group">
+                <a href="{% url 'edit_doctor' doctor.Doctor_id %}" class="btn btn-success">Update</a>
+                <form method="POST" action="{% url 'delete_doctor' doctor.Doctor_id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>              
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock %}

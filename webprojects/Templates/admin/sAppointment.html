@@ -1,0 +1,53 @@
+{% extends "admin/adminDashboard.html"%}
+{% load static %}
+{% block option %}{% endblock %}
+{% block content %}
+<body>
+  <div class="home-content ">
+   <div class="sales-boxes">
+    <div class="recent-sales box" style="width: 100%;">
+     <div class="title">Selected Appointments</div>
+     {% for Appointment in Appointments %}
+     <div class="sales-details">
+      <ul class="details">
+       <li class="topic">Appointment ID</li>
+       <li><a href="#">{{ Appointment.Appointment_id }}</a></li>
+      </ul>
+      <ul class="details">
+       <li class="topic">Doctor</li>
+       <li><a href="#">{{ Appointment.doctor }}</a></li>
+      </ul>
+      <ul class="details">
+       <li class="topic">Patient</li>
+       <li><a href="#">{{ Appointment.patient_name }}</a></li>
+      </ul>
+      <ul class="details">
+       <li class="topic">Reservation Date</li>
+       <li><a href="#">{{ Appointment.reservation_date }}</a></li>
+      </ul>
+      <ul class="details">
+       <li class="topic">Reservation Time</li>
+       <li><a href="#">{{ Appointment.reservation_time }}</a></li>
+      </ul>
+      <ul class="details">
+       <li class="topic">Email</li>
+       <li><a href="#">{{ Appointment.email }}</a></li>
+      </ul>
+      <ul class="details">
+       <li class="topic">Phone</li>
+       <li><a href="#">{{ Appointment.phone }}</a></li>
+      </ul>
+      <form action="{% url 'remove_appointment' Appointment.Appointment_id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="submit">Delete</button>
+      </form>
+     </div>
+     {% endfor %}
+     <div class="button">
+      <a href="#">See All</a>
+     </div>
+    </div>
+   </div>
+  </div>
+</body>
+{% endblock %}

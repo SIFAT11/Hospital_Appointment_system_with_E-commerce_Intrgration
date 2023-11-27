@@ -1,0 +1,101 @@
+{% extends "admin/adminDashboard.html" %}
+{% load static %}
+{% block option %}{% endblock %}
+{% block content %}
+<style>
+  .infinity-image-cont {
+    background: url('https://www.cdc.gov/diabetes/images/library/spotlights/clinic-doctor-image.png?_=45953') center no-repeat;
+    opacity: 1;
+    height: 100vh;
+  }
+
+  .form-input {
+    margin-bottom: 20px;
+  }
+
+  .brs {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+  }
+
+  .btn-block {
+    background-color: #4e73df;
+  }
+</style>
+
+</head>
+
+<body>
+  <br><br><br>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- IMAGE CONTAINER BEGIN -->
+      <div class="col-lg-6 col-md-6 d-none d-md-block infinity-image-cont imgg"></div>
+      <!-- IMAGE CONTAINER END -->
+
+      <!-- FORM CONTAINER BEGIN -->
+      <div class="col-lg-6 col-md-6 infinity-form-container">
+        <div class="col-lg-9 col-md-12 col-sm-8 col-xs-12 infinity-form">
+          <!-- Company Logo -->
+          <br><br>
+          <div class="text-center mb-4">
+            <h4>Add Doctor</h4>
+          </div>
+          <!-- Form -->
+          <form class="px-3" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Input Box -->
+            <div class="form-input">
+              <span><i class="fa fa-user" aria-hidden="true"></i></span>
+              <input type="text" name="doctor_name" placeholder="Doctor Name" tabindex="10" required class="brs">
+            </div>
+            <div class="form-input">
+              <span><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+              <input type="email" name="doctor_email" placeholder="Email Address" tabindex="10" required class="brs">
+            </div>
+            <div class="form-input">
+              <span><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+              <input type="file" name="doctor_image" class="brs">
+            </div>
+            <div class="form-input">
+              <span><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+              <input type="text" name="education_shortlist" placeholder="Education Shortlist" tabindex="10" required class="brs">
+            </div>
+            <div class="form-input">
+              <span><i class="fa fa-building" aria-hidden="true"></i></span>
+              <select name="department" class="brs" required>
+                {% for department in departments %}
+                  <option>{{ department.Department_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            
+            <!-- Register Button -->
+            <div class="mb-3">
+              <button type="submit" class="btn btn-block bg-gradient-info">Add Doctor</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- FORM CONTAINER END -->
+    </div>
+  </div>
+</body>
+{% endblock %}
